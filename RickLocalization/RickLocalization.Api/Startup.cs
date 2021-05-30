@@ -37,14 +37,11 @@ namespace RickLocalization.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddScoped<IRepositoryDapperService, RepositoryDapperService>();
             services.AddScoped<IRickService, RickService>();
             services.AddScoped<IViagemService, ViagemService>();
 
-            services.AddControllers();
-
-            
+            services.AddControllers();            
 
             services.AddDbContext<RickLocalizationContext>(options =>
                 options.UseSqlServer(
@@ -89,9 +86,7 @@ namespace RickLocalization.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RickLocalization v1"));
             }
 
-           // app.UseSwagger();
-
-
+          
             app.UseRouting();
 
             app.UseCors(AllowOrigin);

@@ -2,7 +2,8 @@ import { HomeComponent } from './home/home.component';
 import { PaginaoNaoEncontradaComponent } from './paginao-nao-encontrada/paginao-nao-encontrada.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ErroServidorComponent } from './erro-servidor/erro-servidor.component';
+import { ErroServidorComponent } from './pagina-erro-servidor/erro-servidor.component';
+
 
 
 const routes: Routes = [

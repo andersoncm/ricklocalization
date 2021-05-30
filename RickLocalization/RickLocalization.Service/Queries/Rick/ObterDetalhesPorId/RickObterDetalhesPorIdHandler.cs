@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using RickLocalization.Service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,22 +12,35 @@ namespace RickLocalization.Service.Queries.Rick.ObterDetalhesPorId
     public class RickObterDetalhesPorIdHandler : IRequestHandler<RickObterDetalhesPorIdRequest, RickObterDetalhesPorIdResponse>
     {
         private readonly IRickService _rickService;
+        IMapper _mapper;
 
-        public RickObterDetalhesPorIdHandler(IRickService rickService)
+        public RickObterDetalhesPorIdHandler(IRickService rickService, IMapper mapper)
         {
             _rickService = rickService;
+            _mapper = mapper;
 
         }
         public async Task<RickObterDetalhesPorIdResponse> Handle(RickObterDetalhesPorIdRequest request, CancellationToken cancellationToken)
         {
             var response = new RickObterDetalhesPorIdResponse();
-            var query = await _rickService.ObterDetalhesPorId(request.RickId);           
+            try
+            {
+                var query = await _rickService.ObterDetalhesPorId(request.RickId);
 
-            response.DimensaoOrigem = query.DimensaoOrigem;
-            response.Nome = query.Nome;
-            response.RickId = query.RickId;
+                var resultado = _mapper.Map<RickObterDetalhesPorIdResponse>(query);
 
-            return response;
+                response = resultado;
+
+                return response;
+            }
+            catch (Exception)
+            {
+
+                response.AddNotification("Erro", "Ocorreu uma exceção na sua solicitação");
+                return response;
+            }
+
+           
         }
     }
 }

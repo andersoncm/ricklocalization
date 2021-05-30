@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RickLocalization.Repository.EF;
 using System;
@@ -13,26 +14,34 @@ namespace RickLocalization.Service.Queries.Dimensao.ObterTodos
     public class DimensaoObterTodosHandler : IRequestHandler<DimensaoObterTodosRequest, DimensaoObterTodosResponse>
     {
         private readonly RickLocalizationContext _context;
+        IMapper _mapper;
 
-        public DimensaoObterTodosHandler(RickLocalizationContext context)
+        public DimensaoObterTodosHandler(RickLocalizationContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public async Task<DimensaoObterTodosResponse> Handle(DimensaoObterTodosRequest request, CancellationToken cancellationToken)
         {
-
             var response = new DimensaoObterTodosResponse();
 
-            var query =  _context.Dimensoes.AsNoTracking().Where(a => a.Ativo)
-               .Select(a => new ItemDimensao
-                {
-                   DimensaoId = a.DimensaoId,
-                    Descricao = a.Descricao
-                }).ToList();
+            try
+            {
+                var query = await _context.Dimensoes.AsNoTracking().Where(a => a.Ativo).ToListAsync();
 
-            response.lista =  query;
+                var resultado = _mapper.Map<List<ItemDimensao>>(query);
 
-            return response;
+                response.lista = resultado;
+
+                return response;
+            }
+            catch (Exception)
+            {
+                response.AddNotification("Erro", "Ocorreu uma exceção na sua solicitação");
+                return response;
+            }
+
+
 
         }
     }

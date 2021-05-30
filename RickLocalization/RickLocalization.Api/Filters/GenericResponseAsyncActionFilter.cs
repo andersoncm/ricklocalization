@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using RickLocalization.Domain.Notification;
-using RickLocalization.Service;
 using RickLocalization.Service.GenericResponse;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -20,20 +17,28 @@ namespace RickLocalization.Api.Filters
             
             var response = new Response();
 
-
-            foreach (var x in context.ActionArguments)
-                if (x.Value is Validatable notifiableParams)
-                {
-                   notifiableParams.Validate();
-                    if (!notifiableParams.Valid())
+            if (!context.ModelState.IsValid)
+            {  
+                var errors = context.ModelState
+                    .Where(x => x.Value.Errors.Count > 0)
+                    .ToDictionary(e => e.Key, e => e.Value.Errors.Select(e => new 
                     {
-                        response.AddNotifications(notifiableParams);
-                        response.Title = "Ocorreu um ou mais erros de validação.";
-                        response.Status = (int)HttpStatusCode.BadRequest;
-                        context.Result = new BadRequestObjectResult(response);
-                        return;
-                    }
+                        e.ErrorMessage
+                    })).ToArray();
+
+                var n = new Notifiable();
+                foreach (var item in errors)
+                {                   
+                    n.AddNotification(item.Key, string.Join("," ,item.Value.Select(a=> a.ErrorMessage)), ETypeNotification.Error);
                 }
+
+                response.AddNotifications(n.GetNotifications());
+                response.Title = "Ocorreu um ou mais erros de validação.";
+                response.Status = (int)HttpStatusCode.BadRequest;
+                context.Result = new BadRequestObjectResult(response);
+                return;
+            }
+
 
             var resultContext = await next();
 

@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using RickLocalization.Api.Filters;
 using RickLocalization.Repository.EF;
+using RickLocalization.Service.Commands.Rick.Inserir;
 using RickLocalization.Service.Interfaces;
 using RickLocalization.Service.Queries.Dimensao;
 using RickLocalization.Service.Queries.Rick;
@@ -69,10 +71,17 @@ namespace RickLocalization.Api
 
             var assembly = AppDomain.CurrentDomain.Load("RickLocalization.Service");
             services.AddMediatR(assembly);
+            services.AddAutoMapper(assembly);
 
-            services.AddControllers(options =>
-                options.Filters.Add<GenericResponseAsyncActionFilter>()
-            );
+            /* services.AddControllers(options =>
+                 options.Filters.Add<GenericResponseAsyncActionFilter>()
+             );*/
+
+
+            services.AddControllers(options => options.Filters.Add<GenericResponseAsyncActionFilter>())
+                .AddFluentValidation(configuration => configuration
+                    .RegisterValidatorsFromAssemblyContaining<RickService>())
+                    .ConfigureApiBehaviorOptions(o => o.SuppressModelStateInvalidFilter = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

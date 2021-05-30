@@ -9,23 +9,21 @@ namespace RickLocalization.Service.Queries.Rick.ObterTodos
     {
         public RickObterTodosResponse()
         {
-            List<RickObterTodosResponseItemDapper> lista = new List<RickObterTodosResponseItemDapper>();
+            List<RickObterTodosResponseItem> lista = new List<RickObterTodosResponseItem>();
         }
 
-        public List<RickObterTodosResponseItemDapper> lista { get; set; }
+        public List<RickObterTodosResponseItem> lista { get; set; }
     }
 
-    public class ItemRick
-    {
-        public int RickId { get; set; }
-        public string Foto { get; set; }
-    }
 
-    public class RickObterTodosResponseItemDapper
+    public class RickObterTodosResponseItem
     {
         public int RickId { get; set; }
         public string Nome { get; set; }
         public string Foto { get; set; }
-
     }
+
+   
+
+    
 }

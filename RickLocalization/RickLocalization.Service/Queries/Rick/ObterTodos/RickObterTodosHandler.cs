@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RickLocalization.Repository.EF;
 using RickLocalization.Service.Interfaces;
@@ -12,28 +13,38 @@ using System.Threading.Tasks;
 namespace RickLocalization.Service.Queries.Rick.ObterTodos
 {
     public class RickInserirHandler : IRequestHandler<RickObterTodosRequest, RickObterTodosResponse>
-    {
-       
+    {      
 
         private readonly IRickService _rickService;
+        IMapper _mapper;
 
-        public RickInserirHandler( IRickService rickService)
-        {
-            
+        public RickInserirHandler( IRickService rickService, IMapper mapper)
+        {           
 
             _rickService = rickService;
+            _mapper = mapper;
         }
         public async Task<RickObterTodosResponse> Handle(RickObterTodosRequest request, CancellationToken cancellationToken)
         {
 
             var response = new RickObterTodosResponse();
-            var query = await _rickService.ObterTodos();
+            try
+            {
+                var query = await _rickService.ObterTodos();
 
-          
+                var resultado = _mapper.Map<List<RickObterTodosResponseItem>>(query);
 
-            response.lista = query;
+                response.lista = resultado;
 
-            return response;
+                return response;
+            }
+            catch (Exception)
+            {
+
+                response.AddNotification("Erro", "Ocorreu uma exceção na sua solicitação");
+                return response;
+            }
+           
 
         }
     }

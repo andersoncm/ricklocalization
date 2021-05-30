@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using RickLocalization.Repository.EF;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace RickLocalization.Service.Commands.Viagem.Inserir
     public class ViagemInserirHandler : IRequestHandler<ViagemInserirRequest, ViagemInserirResponse>
     {
         private readonly RickLocalizationContext _context;
+        IMapper _mapper;
 
-        public ViagemInserirHandler(RickLocalizationContext context)
+        public ViagemInserirHandler(RickLocalizationContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public async Task<ViagemInserirResponse> Handle(ViagemInserirRequest request, CancellationToken cancellationToken)
         {
@@ -23,13 +26,9 @@ namespace RickLocalization.Service.Commands.Viagem.Inserir
             {
                 DateTime _dataAtual = DateTime.Now;
 
-                var viagem = new Domain.Entities.Viagem();
+                var viagem = _mapper.Map<Domain.Entities.Viagem>(request);
 
-                viagem.RickId = request.RickId;
-                viagem.DimensaoId = request.DimensaoId;
-                viagem.DataViagem = _dataAtual;
-                viagem.Motivo = request.Motivo;
-
+                viagem.DataViagem = _dataAtual;               
                 viagem.Ativo = true;
                 viagem.DataInclusao = _dataAtual;
                 viagem.DataOperacao = _dataAtual;
@@ -44,7 +43,7 @@ namespace RickLocalization.Service.Commands.Viagem.Inserir
             }
             catch (Exception)
             {
-                response.AddNotification("Erro", "Ocorreu uma excessao na sua solicitação");
+                response.AddNotification("Erro", "Ocorreu uma exceção na sua solicitação");
                 return response;
             }
 

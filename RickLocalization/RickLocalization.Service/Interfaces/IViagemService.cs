@@ -1,4 +1,5 @@
-﻿using RickLocalization.Service.Queries.Viagem.ObterHistoricoViagemPorRickId;
+﻿using RickLocalization.Service.Queries.Viagem;
+using RickLocalization.Service.Queries.Viagem.ObterHistoricoViagemPorRickId;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

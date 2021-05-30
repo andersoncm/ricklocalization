@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
+using AutoMapper;
 
 namespace RickLocalization.Service.Commands.Dimensao.Inserir
 {
@@ -13,10 +14,12 @@ namespace RickLocalization.Service.Commands.Dimensao.Inserir
     {
 
         private readonly RickLocalizationContext _context;
+        IMapper _mapper;
 
-        public DimensaoInserirHandler(RickLocalizationContext context)
+        public DimensaoInserirHandler(RickLocalizationContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<DimensaoInserirResponse> Handle(DimensaoInserirRequest request, CancellationToken cancellationToken)
@@ -30,9 +33,9 @@ namespace RickLocalization.Service.Commands.Dimensao.Inserir
                 {
                     DateTime _dataAtual = DateTime.Now;
 
-                    var dimensao = new Domain.Entities.Dimensao();
+                    var dimensao = _mapper.Map<RickLocalization.Domain.Entities.Dimensao>(request);
 
-                    dimensao.Descricao = request.Descricao;
+                  
                     dimensao.Ativo = true;
                     dimensao.DataInclusao = _dataAtual;
                     dimensao.DataOperacao = _dataAtual;
@@ -51,7 +54,7 @@ namespace RickLocalization.Service.Commands.Dimensao.Inserir
             }
             catch (Exception)
             {
-                response.AddNotification("Erro", "Ocorreu uma excessao na sua solicitação");
+                response.AddNotification("Erro", "Ocorreu uma exceção na sua solicitação");
             }
 
             return response;

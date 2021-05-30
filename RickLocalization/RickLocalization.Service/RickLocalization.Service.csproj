@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RickLocalization.Domain\RickLocalization.Domain.csproj" />
+    <ProjectReference Include="..\RickLocalization.Repository\RickLocalization.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="RepositoryDapperService\ResRick.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResRick.resx</DependentUpon>
+    </Compile>
+    <Compile Update="RepositoryDapperService\ResViagem.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResViagem.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="RepositoryDapperService\ResRick.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResRick.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="RepositoryDapperService\ResViagem.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResViagem.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

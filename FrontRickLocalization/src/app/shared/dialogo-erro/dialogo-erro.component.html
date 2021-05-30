@@ -1,0 +1,9 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+  <h1 mat-dialog-title>Erro</h1>
+  <mat-dialog-content *ngFor="let item of data.errorMessage">
+    <p>{{item}}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="closeDialog()">OK</button>
+  </mat-dialog-actions>
+</section>

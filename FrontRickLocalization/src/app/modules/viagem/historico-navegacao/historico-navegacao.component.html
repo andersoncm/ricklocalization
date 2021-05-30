@@ -1,0 +1,40 @@
+<div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="aplicarFiltro($event.target.value)" placeholder="Filtro">
+  </mat-form-field>
+</div>
+
+<div class="example-container mat-elevation-z8">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+
+    <ng-container matColumnDef="dataViagem">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Data Viagem </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.dataViagem | date :'dd/MM/yyyy hh:mm:ss'}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="dimensaoDescricao">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dimensão </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.dimensaoDescricao}}</mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="motivo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Motivo </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.motivo}} </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 50, 100]"></mat-paginator>
+
+  <button mat-raised-button color="primary">Voltar</button>
+</div>
+
+

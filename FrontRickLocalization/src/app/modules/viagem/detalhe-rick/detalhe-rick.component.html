@@ -1,0 +1,26 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="800px" fxFlex.xs="100%">
+      <mat-card-title>Detalhes do Rick</mat-card-title>
+      <mat-card-content>
+        <div fxLayout="column wrap" fxLayoutGap="40px">
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Nome:</strong></div>
+            <div fxFlex>{{rick?.nome}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Dimensão de origem:</strong></div>
+            <div fxFlex>{{rick?.dimensaoOrigem}}</div>
+          </div>
+
+
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="redirecionarHistoricoViagem(rick.rickId)">Historico</button>
+        <button mat-button color="primary" (click)="abrirModal()">Adicionar Viagem</button>
+        <button mat-raised-button color="primary" [routerLink]="['/viagem/pesquisaPorRick']">Voltar</button>
+      </mat-card-actions>
+
+    </mat-card>
+</section>

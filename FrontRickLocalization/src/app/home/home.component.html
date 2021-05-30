@@ -1,0 +1,23 @@
+<section fxLayout="column" fxFlexAlign="stretch" style="margin-left: 10px;">
+  <div fxFlexAlign="center">
+    <p>Bem vindo ao RickLocalization</p>
+  </div>
+
+  <p>A aplicação está usando:</p>
+
+  <mat-tab-group>
+    <mat-tab label="Angular">
+      <p>Versão 9.1.13</p>
+    </mat-tab>
+    <mat-tab label="Angular Material Components">
+     <p>Versão 9.2.4</p>
+    </mat-tab>
+    <mat-tab label=".NET Core Web API ">
+     <p>Versão 3.1 com CQRS e Mediator</p>
+    </mat-tab>
+    <mat-tab label="Banco de dados">
+     <p>SQL Server Express versão 14</p>
+    </mat-tab>
+  </mat-tab-group>
+  <button mat-raised-button color="primary" class="botaoListaRick" [routerLink]="['/viagem/pesquisaPorRick']">Lista de Rick</button>
+</section>

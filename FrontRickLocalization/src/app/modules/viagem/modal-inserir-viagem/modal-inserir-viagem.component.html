@@ -1,0 +1,37 @@
+<div>
+  <div class="add-title">
+    <h2 class="primary">Inserir Viagem para {{data.rick.nome}}</h2>
+  </div>
+  <div>
+    <form [formGroup]="viagemForm" (ngSubmit)="salvar()">
+      <div class="text-inside">
+        <mat-form-field class="example-full-width">
+          <mat-label>Selecione a dimensão</mat-label>
+          <mat-select  formControlName="dimensaoId">
+            <mat-option *ngFor="let item of listaDimensoes" [value]="item.dimensaoId">
+              {{item.descricao}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="!f.dimensaoId.valid && f.dimensaoId.touched">
+            Campo Invalido
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="text-inside">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Motivo" formControlName="motivo">
+          <mat-error *ngIf="!f.motivo.valid && f.motivo.touched">
+            Campo Invalido
+          </mat-error>
+
+        </mat-form-field>
+      </div>
+
+      <div class="btn-sec">
+        <button mat-raised-button type="submit" color="primary" class="Update-btn" [disabled]="!viagemForm.valid">Salvar</button>
+        <button mat-button mat-dialog-close>Cancelar</button>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -6,7 +6,7 @@ Como executar o projeto
 
 Abrir a Pasta RickLocalization e executar a solution Visual Studio
 
-Utilizar atraves do migration o Package Manager Console e seguir o comando update-database 
+Utilizar atraves do migration o Package Manager Console e seguir o comando update-database selecionando o projeto RickLocalization.Repository 
 
 Será criado um banco de dados no SQL Server Local com nome de RickLocalization com alguns registros
 

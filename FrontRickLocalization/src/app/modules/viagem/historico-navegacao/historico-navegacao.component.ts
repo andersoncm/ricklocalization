@@ -80,5 +80,10 @@ export class HistoricoNavegacaoComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
+
+  voltarPagina(){
+     this.router.navigate([`viagem/detalheRick/${this.id}`]);
+  }
+
 }
 

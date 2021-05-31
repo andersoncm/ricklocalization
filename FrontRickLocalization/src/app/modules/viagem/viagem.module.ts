@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DetalheRickComponent } from './detalhe-rick/detalhe-rick.component';
 import { HistoricoNavegacaoComponent } from './historico-navegacao/historico-navegacao.component';
 import { ModalInserirViagemComponent } from './modal-inserir-viagem/modal-inserir-viagem.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ModalInserirViagemComponent } from './modal-inserir-viagem/modal-inseri
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule
   ]
 })
 export class ViagemModule { }

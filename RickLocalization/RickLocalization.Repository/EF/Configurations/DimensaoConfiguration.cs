@@ -14,6 +14,25 @@ namespace RickLocalization.Repository.EF.Configurations
             builder
                .ToTable("Dimensao", "dbo")
                .HasKey(e => e.DimensaoId);
+
+            builder
+             .Property(a => a.Descricao)
+             .HasColumnType("varchar").HasMaxLength(50).IsRequired();
+
+            builder
+              .Property(a => a.DataInclusao)
+              .HasColumnType("datetime");
+
+            builder
+              .Property(a => a.DataOperacao)
+              .HasColumnType("datetime").IsRequired();
+
+            builder
+             .Property(a => a.NaturezaOperacao)
+             .HasColumnType("char")
+             .HasMaxLength(1).IsRequired();
+
+
         }
     }
 }

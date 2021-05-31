@@ -24,6 +24,7 @@ namespace RickLocalization.Repository.EF
         {
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+          //  base.OnModelCreating(modelBuilder);
         }
 
     }

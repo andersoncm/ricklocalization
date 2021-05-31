@@ -43,12 +43,12 @@ namespace RickLocalization.Api
             services.AddScoped<IRickService, RickService>();
             services.AddScoped<IViagemService, ViagemService>();
 
-            services.AddControllers();            
+            services.AddControllers();
 
             services.AddDbContext<RickLocalizationContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("RickDbConnection"),
-                    b => b.MigrationsAssembly(typeof(RickLocalizationContext).Assembly.FullName)));
+                    Configuration.GetConnectionString("RickDbConnection")));/*,
+                    b => b.MigrationsAssembly(typeof(RickLocalizationContext).Assembly.FullName)));*/
 
 
             services.AddCors(options =>

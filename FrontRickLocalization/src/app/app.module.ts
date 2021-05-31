@@ -18,7 +18,8 @@ import { HttpLoadingSpinnerInterceptor } from './interceptor/http-loading-spinne
 
 
 import { HomeComponent } from './home/home.component';
-import { ErroServidorComponent } from './pagina-erro-servidor/erro-servidor.component';
+import {  PaginaErroServidorComponent } from './pagina-erro-servidor/pagina-erro-servidor.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ErroServidorComponent } from './pagina-erro-servidor/erro-servidor.comp
     FooterComponent,
     LayoutComponent,
     SidenavListComponent,
-    ErroServidorComponent,
+    PaginaErroServidorComponent,
     HomeComponent,
 
   ],
@@ -38,7 +39,8 @@ import { ErroServidorComponent } from './pagina-erro-servidor/erro-servidor.comp
     HttpClientModule  ,
    AngularMaterialModule,
     AppRoutingModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FlexLayoutModule
 
 
 

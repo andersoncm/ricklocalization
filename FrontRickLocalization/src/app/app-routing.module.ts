@@ -2,7 +2,7 @@ import { HomeComponent } from './home/home.component';
 import { PaginaoNaoEncontradaComponent } from './paginao-nao-encontrada/paginao-nao-encontrada.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ErroServidorComponent } from './pagina-erro-servidor/erro-servidor.component';
+import { PaginaErroServidorComponent } from './pagina-erro-servidor/pagina-erro-servidor.component';
 
 
 
@@ -26,7 +26,7 @@ const routes: Routes = [
   },
 
   { path: '404', component: PaginaoNaoEncontradaComponent},
-  { path: '500', component: ErroServidorComponent },
+  { path: '500', component: PaginaErroServidorComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/404', pathMatch: 'full'}
 ];

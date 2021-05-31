@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-erro-servidor',
-  templateUrl: './erro-servidor.component.html',
-  styleUrls: ['./erro-servidor.component.css']
+  selector: 'app-pagina-erro-servidor',
+  templateUrl: './pagina-erro-servidor.component.html',
+  styleUrls: ['./pagina-erro-servidor.component.css']
 })
-export class ErroServidorComponent implements OnInit {
+export class PaginaErroServidorComponent implements OnInit {
   public reportedError: boolean;
   public errorPercentage: number = 0;
   public timer;

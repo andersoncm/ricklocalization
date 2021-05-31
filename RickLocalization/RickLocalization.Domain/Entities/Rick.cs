@@ -6,6 +6,10 @@ namespace RickLocalization.Domain.Entities
 {
    public class Rick
     {
+        public Rick()
+        {
+            Viagens = new List<Viagem>();
+        }
         public int RickId { get; set; }
         public string Nome { get; set; }
         public string Foto { get; set; }
@@ -16,6 +20,8 @@ namespace RickLocalization.Domain.Entities
         public DateTime? DataOperacao { get; set; }
 
         public virtual Dimensao Dimensao { get; set; }
+        public virtual List<Viagem> Viagens { get; set; }
+
 
 
     }

@@ -14,4 +14,8 @@
     <ProjectReference Include="..\RickLocalization.Domain\RickLocalization.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EF\Interfaces\" />
+  </ItemGroup>
+
 </Project>

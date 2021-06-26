@@ -11,6 +11,6 @@ namespace RickLocalization.Service.RepositoryDapperService
         Task<IEnumerable<T>> QueryAsync<T>(string sql, object parametros);
        
         Task<GridReader> QueryMultipleAsync(string sql, object parametros);
-        string DataBaseName { get; }
+      
     }
 }

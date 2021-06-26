@@ -1,25 +1,21 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using RickLocalization.Repository.EF;
+﻿using AutoMapper;
+using MediatR;
+using RickLocalization.Service.Repository;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using RickLocalization.Domain.Entities;
-using AutoMapper;
 
 namespace RickLocalization.Service.Commands.Rick.Inserir
 {
     public class RickInserirHandler : IRequestHandler<RickInserirRequest, RickInserirResponse>
     {
-        private readonly RickLocalizationContext _context;
+        
+        IRickRepository _repository;
         IMapper _mapper;
 
-        public RickInserirHandler(RickLocalizationContext context, IMapper mapper)
+        public RickInserirHandler(IRickRepository repository, IMapper mapper)
         {
-            _context = context;
+            _repository = repository;
             _mapper = mapper;
         }
         public async Task<RickInserirResponse> Handle(RickInserirRequest request, CancellationToken cancellationToken)
@@ -37,10 +33,7 @@ namespace RickLocalization.Service.Commands.Rick.Inserir
                 rick.DataOperacao = _dataAtual;
                 rick.NaturezaOperacao = "I";
 
-                _context.Ricks.Add(rick);
-
-                await _context.SaveChangesAsync();
-
+               await _repository.Add(rick);
 
                 return response;
             }

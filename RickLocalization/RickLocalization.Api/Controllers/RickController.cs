@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RickLocalization.Service.Commands.Rick.Inserir;
+using RickLocalization.Service.GenericResponse;
 using RickLocalization.Service.Queries.Rick.ObterDetalhesPorId;
 using RickLocalization.Service.Queries.Rick.ObterTodos;
 using System;
@@ -24,6 +25,9 @@ namespace RickLocalization.Api.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseModel<RickObterTodosResponse>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Response))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Response))]
         [Route("obterTodos")]
 
         public async Task<RickObterTodosResponse> ObterTodos([FromQuery] RickObterTodosRequest request)

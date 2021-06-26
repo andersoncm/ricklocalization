@@ -2,27 +2,19 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using RickLocalization.Api.Filters;
 using RickLocalization.Repository.EF;
-using RickLocalization.Service.Commands.Rick.Inserir;
 using RickLocalization.Service.Interfaces;
-using RickLocalization.Service.Queries.Dimensao;
 using RickLocalization.Service.Queries.Rick;
 using RickLocalization.Service.Queries.Viagem;
+using RickLocalization.Service.Repository;
 using RickLocalization.Service.RepositoryDapperService;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 
 namespace RickLocalization.Api
 {
@@ -39,6 +31,9 @@ namespace RickLocalization.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped<IRickRepository, RepositoryRick>();
+
             services.AddScoped<IRepositoryDapperService, RepositoryDapperService>();
             services.AddScoped<IRickService, RickService>();
             services.AddScoped<IViagemService, ViagemService>();

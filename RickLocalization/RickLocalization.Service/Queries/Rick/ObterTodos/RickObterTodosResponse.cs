@@ -1,4 +1,5 @@
-﻿using RickLocalization.Domain.Notification;
+﻿using Microsoft.AspNetCore.Mvc;
+using RickLocalization.Domain.Notification;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,8 @@ namespace RickLocalization.Service.Queries.Rick.ObterTodos
         }
 
         public List<RickObterTodosResponseItem> lista { get; set; }
+
+       
     }
 
 
